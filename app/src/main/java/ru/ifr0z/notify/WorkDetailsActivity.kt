@@ -10,6 +10,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.workManagerr.notify.R
 import com.workManagerr.notify.databinding.ActivityWorkDetailsBinding
+import ru.ifr0z.notify.work.NotifyWork.Companion.TASK_DESC
+import ru.ifr0z.notify.work.NotifyWork.Companion.TASK_TITLE
 
 class WorkDetailsActivity : AppCompatActivity() {
 
@@ -21,9 +23,9 @@ class WorkDetailsActivity : AppCompatActivity() {
 
         binding = ActivityWorkDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-Log.d("fdsafasdfadsfsfd",intent.getStringExtra("title")+"  "+intent.getStringExtra("des"))
-        binding.toolbar.text=intent.getStringExtra("title")
-        binding.des.text=intent.getStringExtra("des")
+
+        binding.toolbar.text=intent.getStringExtra(TASK_TITLE)
+        binding.des.text=intent.getStringExtra(TASK_DESC)
 
     }
 

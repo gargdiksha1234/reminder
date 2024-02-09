@@ -125,7 +125,6 @@ class CreateTaskActivity : AppCompatActivity() {
                     //check time difference should be 7 min minimum.
                     if (timeDifferenceMinutes >= 7L) {
 
-                        val data = Data.Builder().putInt(NOTIFICATION_ID, 0).build()
 
                         /**
                          * to get 5 min before notification
@@ -135,7 +134,7 @@ class CreateTaskActivity : AppCompatActivity() {
                         scheduleNotification(
                             taskTitle,
                             delay,
-                            data,
+
                             taskDescription,
                             customTime
                         )
@@ -179,7 +178,7 @@ class CreateTaskActivity : AppCompatActivity() {
 private fun scheduleNotification(
     title: String,
     delay: Long,
-    data: Data,
+
     des: String,
     currentTime: Long
 ) {
@@ -187,14 +186,16 @@ private fun scheduleNotification(
     vm.addWork(WorkListEntity(0, false, title, des, currentTime))
     val uniqueWorkName =
         NOTIFICATION_WORK + currentTimeMillis() // Unique name for each work request
-    val tit = Data.Builder().putString(TASK_TITLE, title).build()
-    val des = Data.Builder().putString(TASK_DESC, des).build()
+    val data = Data.Builder().putString(TASK_TITLE, title).putString(TASK_DESC,des).putInt( NOTIFICATION_ID, 0)
+        .build()
+
 
     val notificationWork = OneTimeWorkRequest.Builder(NotifyWork::class.java)
         .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+
         .setInputData(data)
-        .setInputData(tit)
-        .setInputData(des)
+
+
         .build()
 
     val instanceWorkManager = WorkManager.getInstance(this)

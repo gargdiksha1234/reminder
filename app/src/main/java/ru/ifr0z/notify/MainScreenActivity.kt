@@ -13,7 +13,6 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -24,12 +23,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.workManagerr.notify.R
 import com.workManagerr.notify.databinding.ActivityDetailsBinding
 import com.workManagerr.notify.db.WorkListEntity
-import com.workManagerr.notify.extension.vectorToBitmap
+import ru.ifr0z.notify.extension.vectorToBitmap
 import com.workManagerr.notify.viewmodel.WorkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ru.ifr0z.notify.adapter.WorkAdapter
 import ru.ifr0z.notify.utils.SwipeToDeleteCallback
 import ru.ifr0z.notify.work.NotifyWork
+import ru.ifr0z.notify.work.NotifyWork.Companion.TASK_DESC
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -64,15 +64,15 @@ class MainScreenActivity : AppCompatActivity() {
          mAdapter.onDetailsClick { pos: Int ->
 
             val intent = Intent(this, WorkDetailsActivity::class.java)
-            intent.putExtra("title", mAdapter.userList?.get(pos)?.title)
-            intent.putExtra("des", mAdapter.userList?.get(pos)?.desc)
+            intent.putExtra(NotifyWork.TASK_TITLE, mAdapter.userList?.get(pos)?.title)
+            intent.putExtra(TASK_DESC, mAdapter.userList?.get(pos)?.desc)
             startActivity(intent)
         }
          mAdapter.onDeleteCallBack { pos: Int ->
             vm.deleteAllData()
         }
         mAdapter.onTimeRemainingCallBack {
-            Toast.makeText(this, "Time is Remaining ", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.time_is_remaining), Toast.LENGTH_LONG).show()
         }
 
     }
@@ -80,7 +80,7 @@ class MainScreenActivity : AppCompatActivity() {
     private fun setObserver() {
         vm.getData.observe(this) {
             if (it != null) {
-                mAdapter?.setData(it.toMutableList() as ArrayList<WorkListEntity>)
+                mAdapter.setData(it.toMutableList() as ArrayList<WorkListEntity>)
             }
 
         }
@@ -113,19 +113,19 @@ class MainScreenActivity : AppCompatActivity() {
     ) {
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Is Work Complete")
+        builder.setTitle(getString(R.string.is_work_complete))
             .setCancelable(false)
             .setNegativeButton(
-                "Cancel"
+                getString(R.string.cancel)
             ) { dialog, _ ->
                 dialog.dismiss()
 
 
             }
             .setPositiveButton(
-                "Ok"
+                getString(R.string.ok_)
             ) { _, _ ->
-                val data = mAdapter?.userList?.get(pos)?.apply {
+                val data = mAdapter.userList?.get(pos)?.apply {
                     isWorkComplete = true
                 }
 
@@ -134,7 +134,7 @@ class MainScreenActivity : AppCompatActivity() {
 
                     vm.updateData(data)
                     sendNotification(id = 0, data.title, data.desc)
-                    Log.d("sdafasdfdas",data.title+"   "+data.desc)
+
                 }
             }
         val alert = builder.create()
@@ -149,7 +149,7 @@ class MainScreenActivity : AppCompatActivity() {
         val colorDrawable = ColorDrawable(color)
         val swipeToDeleteCallback = SwipeToDeleteCallback(deleteIcon, colorDrawable) { position ->
             // Handle the swipe-to-delete action
-            vm.deleteData(mAdapter?.userList?.get(position)!!)
+            vm.deleteData(mAdapter.userList?.get(position)!!)
 
 
         }
@@ -160,36 +160,27 @@ class MainScreenActivity : AppCompatActivity() {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun sendNotification(id: Int? = 0, title: String, des: String) {
+    private fun sendNotification(id: Int, title: String, des: String) {
         val intent = Intent(applicationContext, WorkDetailsActivity::class.java)
 
         intent.putExtra(NotifyWork.NOTIFICATION_ID, id)
-        intent.putExtra("title", title)
-        intent.putExtra("des", des)
+        intent.putExtra(NotifyWork.TASK_TITLE, title)
+        intent.putExtra(TASK_DESC, des)
 
         val notificationManager =
             applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val bitmap = applicationContext.vectorToBitmap(R.drawable.ic_schedule_black_24dp)
-        val titleNotification = "Complete"
-        val subtitleNotification = title
+        val titleNotification = getString(R.string.complete)
 
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_MUTABLE)
-        } else {
-            PendingIntent.getActivity(
-                applicationContext,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        }
+        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
         val notification = NotificationCompat.Builder(
             applicationContext,
             NotifyWork.NOTIFICATION_CHANNEL
         )
             .setLargeIcon(bitmap).setSmallIcon(R.drawable.ic_schedule_white)
-            .setContentTitle(titleNotification).setContentText(subtitleNotification)
+            .setContentTitle(titleNotification).setContentText(title)
             .setDefaults(NotificationCompat.DEFAULT_ALL).setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -218,7 +209,7 @@ class MainScreenActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(id!!, notification.build())
+        notificationManager.notify(id, notification.build())
     }
 }
 

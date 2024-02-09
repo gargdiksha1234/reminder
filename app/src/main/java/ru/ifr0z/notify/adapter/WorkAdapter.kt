@@ -11,6 +11,8 @@ import com.workManagerr.notify.databinding.LayoutDetailsListBinding
 import com.workManagerr.notify.db.WorkListEntity
 import ru.ifr0z.notify.utils.AppUtils.calculateTimeBetweenTwoDatesNotification
 import ru.ifr0z.notify.utils.AppUtils.formatDateTimeFromMillis
+import ru.ifr0z.notify.utils.constants.AppConstants.COMPLETE
+import ru.ifr0z.notify.utils.constants.AppConstants.TIME_OVER
 import javax.inject.Inject
 
 
@@ -60,12 +62,12 @@ class WorkAdapter @Inject constructor() :
             binding.tvTime.text = formatDateTimeFromMillis(userList?.get(position)?.createdDate!!)
 
             val takeDiff = calculateTimeBetweenTwoDatesNotification(userList?.get(position)?.createdDate!!)
-            if ("Time Over" == takeDiff) {
+            if (TIME_OVER == takeDiff) {
                 if (userList?.get(position)?.isWorkComplete==true)
-                    binding.remianing.text = "Complete"
+                    binding.remianing.text = COMPLETE
 
                 else {
-                    binding.remianing.text = "Time Over"
+                    binding.remianing.text = TIME_OVER
                     binding.remianing.setTextColor(Color.BLUE)
                 }
             } else {
@@ -76,7 +78,7 @@ class WorkAdapter @Inject constructor() :
 
 
             binding.isVerified.setOnClickListener {
-                if (takeDiff == "Time Over")
+                if (takeDiff == TIME_OVER)
                     onTapWorkDoneCallBack(position, userList?.get(position)?.isWorkComplete!!)
                 else onTimeRemainingCallBack()
             }

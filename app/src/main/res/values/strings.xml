@@ -16,8 +16,6 @@
     <string name="description_can_t_be_empty">Description can\'t be empty</string>
     <string name="title_can_t_be_empty">Title can\'t be empty</string>
     <string name="cancel">Cancel</string>
-    <string name="cancel_">CANCEL</string>
-    <string name="ok">Ok</string>
     <string name="ok_">OK</string>
     <string name="title_activity_work_details">WorkDetailsActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -27,6 +25,9 @@
     <string name="previous">Previous</string>
     <string name="title_should_not_be_empty">Title should not be empty</string>
     <string name="description_should_not_be_empty">Description should not be empty</string>
+    <string name="time_is_remaining">"Time is Remaining "</string>
+    <string name="is_work_complete">Is Work Complete</string>
+    <string name="complete">Complete</string>
 
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

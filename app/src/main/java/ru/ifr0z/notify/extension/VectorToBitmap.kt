@@ -1,4 +1,4 @@
-package com.workManagerr.notify.extension
+package ru.ifr0z.notify.extension
 
 import android.content.Context
 import android.graphics.Bitmap

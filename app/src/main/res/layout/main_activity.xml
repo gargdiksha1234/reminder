@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorNull"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorNull">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/material_dynamic_neutral90"
+                android:padding="5dp"
+                android:text="Date"
+                android:textColor="@color/colorPrimary" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:layout_marginTop="10dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:paddingStart="8dp"
+                android:paddingEnd="0dp" />
+
+            <TextView
+                android:id="@+id/Time"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/datePicker"
+                android:background="@color/material_dynamic_neutral90"
+                android:padding="5dp"
+                android:text="Time"
+                android:textColor="@color/colorPrimary" />
+
+            <com.workManagerr.notify.custom.TimePickerCustom
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Time"
+                android:timePickerMode="spinner" />
+
+            <EditText
+                android:id="@+id/textview"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/timePicker"
+                android:background="@color/material_dynamic_neutral90"
+                android:hint="Title"
+                android:maxLength="40"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="45dp"
+                android:layout_below="@id/textview"
+                android:layout_marginTop="15dp"
+                android:background="@color/material_dynamic_neutral90"
+                android:hint="Description"
+                android:maxLines="4"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/doneFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Save"
+        app:elevation="8dp"
+        app:layout_anchorGravity="bottom|right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_done_white_24dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

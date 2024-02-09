@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Notify</string>
+
+    <string name="notification_title">Reminder</string>
+    <string name="notification_subtitle">Surprise!</string>
+
+    <string name="notification_schedule_title">Schedule notification:\u00a0</string>
+    <string name="notification_schedule_pattern">dd.MM.yy \u00B7 HH:mm</string>
+    <string name="notification_schedule_error">
+        Schedule notification: Incorrect Date and Time
+    </string>
+    <string name="time_gap">
+        Minimum 7 min time gap required
+    </string>
+    <string name="please_fill_all_values">Please fill all values</string>
+    <string name="description_can_t_be_empty">Description can\'t be empty</string>
+    <string name="title_can_t_be_empty">Title can\'t be empty</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_">CANCEL</string>
+    <string name="ok">Ok</string>
+    <string name="ok_">OK</string>
+    <string name="title_activity_work_details">WorkDetailsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="title_should_not_be_empty">Title should not be empty</string>
+    <string name="description_should_not_be_empty">Description should not be empty</string>
+
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarWhite">
+        <item name="android:textColorPrimary">@color/colorNull</item>
+    </style>
+    <style name="round">
+        <item name="cornerSize">50%
+        </item>
+    </style>
+</resources>

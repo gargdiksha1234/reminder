@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/passwordIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+     android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleTVDeleteItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:lineSpacingExtra="1sp"
+        android:text="Is Work Complete"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/passwordIV"
+        app:layout_constraintStart_toStartOf="@id/passwordIV"
+        app:layout_constraintTop_toBottomOf="@id/passwordIV" />
+
+    <TextView
+        android:id="@+id/messageTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTVDeleteItem" />
+
+    <TextView
+        android:id="@+id/cancel_button"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:text="@string/cancel"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/okayBtn"
+        app:layout_constraintEnd_toStartOf="@id/okayBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/okayBtn" />
+
+    <TextView
+        android:id="@+id/okayBtn"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="22dp"
+        android:gravity="center"
+        android:letterSpacing="-0.06"
+        android:lineSpacingExtra="8sp"
+        android:text="Ok"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancel_button"
+        app:layout_constraintTop_toBottomOf="@id/messageTV"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
